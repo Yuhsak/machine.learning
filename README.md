@@ -23,14 +23,14 @@ const perceptron = new Perceptron({
 })
 
 // you can make chain
-perceptron.input([0,0]).should.be(0)
-	.input([1,0]).should.be(0)
-	.input([0,1]).should.be(0)
-	.input([1,1]).should.be(1)
+perceptron.this([0,0]).should.be(0)
+	.this([1,0]).should.be(0)
+	.this([0,1]).should.be(0)
+	.this([1,1]).should.be(1)
 
 // or just like this
 const x = [ [0,0], [0,1], [1,0], [1,1] ]
-perceptron.input(x).should.be([0,0,0,1])
+perceptron.this(x).should.be([0,0,0,1])
 
 // event for each epoch
 perceptron.on('process', ({epoch, elapsedEpoch, w}) => {})
@@ -41,7 +41,7 @@ perceptron.on('done', ({epoch, elapsedEpoch, w}) => {
 })
 
 // train synchronously
-const result = perceptron.train().output(x)
+const result = perceptron.train().what.is.that(x)
 console.log('result => [' + result + ']') // should be [0,0,0,1]
 
 // train asynchronously
@@ -51,6 +51,6 @@ perceptron
 		async: true // if async: true, then process will be executed asynchronously, and returns a promise
 	})
 	.then(model => {
-		console.log('result => [' + model.output(x) + ']')// should be [0,0,0,1]
+		console.log('result => [' + model.what.is.that(x) + ']')// should be [0,0,0,1]
 	})
 ```

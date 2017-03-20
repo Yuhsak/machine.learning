@@ -97,6 +97,10 @@ class Perceptron {
 		return this
 	}
 	
+	this(input) {
+		return this.input(input)
+	}
+	
 	get should() {
 		return this
 	}
@@ -114,6 +118,18 @@ class Perceptron {
 			return util.step(util.dot(_inputVec, this.w))
 		})
 		return o.length == 1 ? o[0] : o
+	}
+	
+	get what() {
+		return this
+	}
+	
+	get is() {
+		return this
+	}
+	
+	that(input) {
+		return this.output(input)
 	}
 	
 	on(name, func) {
