@@ -1,4 +1,7 @@
 .git
 .DS_Store
+.babelrc
+.gitignore
 test.js
-**/src
+gulpfile.babel.js
+/src

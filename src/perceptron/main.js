@@ -126,4 +126,4 @@ class Perceptron {
 	
 }
 
-module.exports = Perceptron
+export default Perceptron
