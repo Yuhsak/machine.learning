@@ -1,0 +1,26 @@
+{
+  "name": "machine.learning",
+  "version": "0.0.1",
+  "description": "Simple machine learning module for node.js & browsers.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuhsak/machine.learning.git"
+  },
+  "keywords": [
+    "machine",
+    "learning",
+    "machine-learning",
+    "machine.learning",
+    "ml"
+  ],
+  "author": "Yuhsak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yuhsak/machine.learning/issues"
+  },
+  "homepage": "https://github.com/Yuhsak/machine.learning#readme"
+}
