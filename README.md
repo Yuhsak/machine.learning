@@ -19,7 +19,7 @@ import {Perceptron} from 'machine.learning'
 const perceptron = new Perceptron({
 	epoch: 500, // optional, default to 1000
 	eta: 0.2, // optional, default to 0.1
-	vias: 2, // optional, default to 1
+	bias: 2, // optional, default to 1
 })
 
 // you can make chain
