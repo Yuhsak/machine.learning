@@ -66,7 +66,7 @@ class Perceptron {
 	
 	[_process]() {
 		this.elapsedEpoch++
-		this.xWith.forEach((inputVec, index) => {
+		this.xWithBias.forEach((inputVec, index) => {
 			const o = this.output(inputVec)[0]
 			const y = this.y[index]
 			this.w = this.w.map((weight, _index) => {

@@ -92,6 +92,7 @@
 
 	var util = {
 		dot: function dot(vec1, vec2) {
+			// console.log(vec1)
 			return vec1.map(function (item, index) {
 				return item * vec2[index];
 			}).reduce(function (a, b) {
@@ -119,20 +120,20 @@
 	    _startSync = _map2[0],
 	    _startAsync = _map2[1],
 	    _process = _map2[2],
-	    _withVias = _map2[3];
+	    _withBias = _map2[3];
 
 	var Perceptron = function () {
 		function Perceptron() {
 			var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
 			    epoch = _ref.epoch,
 			    eta = _ref.eta,
-			    vias = _ref.vias;
+			    bias = _ref.bias;
 
 			(0, _classCallCheck3.default)(this, Perceptron);
 
 			this.epoch = epoch ? epoch : 1000;
 			this.eta = eta ? eta : 0.1;
-			this.vias = vias ? vias : 1;
+			this.bias = bias ? bias : 1;
 			this.elapsedEpoch = 0;
 			this.x = [];
 			this.y = [];
@@ -144,7 +145,7 @@
 			key: _startSync,
 			value: function value() {
 				var r = false;
-				while (!r) {
+				while (!r && this.elapsedEpoch < this.epoch) {
 					r = this[_process]();
 				}
 				this.emit('done', this.resultProps);
@@ -179,20 +180,21 @@
 				var _this2 = this;
 
 				this.elapsedEpoch++;
-				this.xWithVias.forEach(function (inputVec, index) {
-					var o = _this2.output(inputVec);
+				this.xWith.forEach(function (inputVec, index) {
+					var o = _this2.output(inputVec)[0];
 					var y = _this2.y[index];
 					_this2.w = _this2.w.map(function (weight, _index) {
 						return weight + (y - o) * inputVec[_index] * _this2.eta;
 					});
 				});
 				this.emit('process', this.resultProps);
+				// console.log(this.w)
 				return this.output(this.x).every(function (outputVal, index) {
 					return outputVal == _this2.y[index];
 				});
 			}
 		}, {
-			key: _withVias,
+			key: _withBias,
 			value: function value() {
 				var _this3 = this;
 
@@ -200,10 +202,9 @@
 					x[_key] = arguments[_key];
 				}
 
-				var _x = x.map(function (inputVec) {
-					return [].concat((0, _toConsumableArray3.default)(inputVec), [_this3.vias]);
+				return x.map(function (inputVec) {
+					return [].concat((0, _toConsumableArray3.default)(inputVec), [_this3.bias]);
 				});
-				return _x.length == 1 ? _x[0] : _x;
 			}
 		}, {
 			key: 'learn',
@@ -213,21 +214,21 @@
 				    _ref3$async = _ref3.async,
 				    async = _ref3$async === undefined ? false : _ref3$async;
 
-				this.w = w ? w : this.w.length > 0 ? this.w : Array(this.xWithVias[0].length).fill(0);
+				this.w = w ? w : this.w.length > 0 ? this.w : Array(this.xWithBias[0].length).fill(0);
 				this.elapsedEpoch = 0;
 				return async ? this[_startAsync]() : this[_startSync]();
 			}
 		}, {
 			key: 'input',
 			value: function input(_input2) {
-				var _input = util.isNested(_input2) ? _input2 : [_input2];
-				this.x = [].concat((0, _toConsumableArray3.default)(this.x), (0, _toConsumableArray3.default)(_input));
+				this.x = [].concat((0, _toConsumableArray3.default)(this.x), (0, _toConsumableArray3.default)(_input2));
 				return this;
 			}
 		}, {
 			key: 'this',
 			value: function _this(input) {
-				return this.input(input);
+				var _input = util.isNested(input) ? input : [input];
+				return this.input(_input);
 			}
 		}, {
 			key: 'be',
@@ -243,15 +244,16 @@
 
 				var _input = util.isNested(input) ? input : [input];
 				var o = _input.map(function (inputVec) {
-					var _inputVec = _this4.w.length > inputVec.length ? _this4[_withVias](inputVec) : inputVec;
-					return util.step(util.dot(_inputVec, _this4.w));
+					var _inputVec = _this4.w.length > inputVec.length ? _this4[_withBias](inputVec) : inputVec;
+					return util.step(util.dot(util.isNested(_inputVec) ? _inputVec[0] : _inputVec, _this4.w));
 				});
-				return o.length == 1 ? o[0] : o;
+				return o;
 			}
 		}, {
 			key: 'that',
 			value: function that(input) {
-				return this.output(input);
+				var o = this.output(input);
+				return o.length == 1 ? o[0] : o;
 			}
 		}, {
 			key: 'on',
@@ -266,9 +268,9 @@
 				});
 			}
 		}, {
-			key: 'xWithVias',
+			key: 'xWithBias',
 			get: function get() {
-				return this[_withVias].apply(this, (0, _toConsumableArray3.default)(this.x));
+				return this[_withBias].apply(this, (0, _toConsumableArray3.default)(this.x));
 			}
 		}, {
 			key: 'resultProps',

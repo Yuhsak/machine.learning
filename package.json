@@ -1,6 +1,6 @@
 {
   "name": "machine.learning",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Simple machine learning module for node.js & browsers.",
   "main": "main.js",
   "scripts": {
