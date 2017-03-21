@@ -54,3 +54,21 @@ perceptron
 		console.log('result => [' + model.what.is.that(x) + ']')// should be [0,0,0,1]
 	})
 ```
+
+## Development
+
+Currently this module uses gulp as task runner for build source codes, and mocha for testing.
+
+Please see once `gulpfile.babel.js` and `test/test.js` if you're getting in.
+
+### Build & start watching source code
+
+```sh
+npm start
+```
+
+### Run test
+
+```sh
+npm test
+```
