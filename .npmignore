@@ -2,6 +2,7 @@
 .DS_Store
 .babelrc
 .gitignore
-test.js
+example.js
 gulpfile.babel.js
 /src
+/test

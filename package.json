@@ -1,12 +1,12 @@
 {
   "name": "machine.learning",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple machine learning module for node.js & browsers.",
   "main": "main.js",
   "scripts": {
     "start": "gulp",
     "build": "gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -34,6 +34,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
+    "mocha": "^3.2.0",
+    "should": "^11.2.1",
     "webpack-gulp": "^2.0.3"
   }
 }

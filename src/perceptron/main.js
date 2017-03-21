@@ -85,7 +85,7 @@ class Perceptron {
 		return {epoch: this.epoch, elapsedEpoch: this.elapsedEpoch, w: this.w}
 	}
 	
-	train({w, async=false}={}) {
+	learn({w, async=false}={}) {
 		this.w = w ? w : this.w.length > 0 ? this.w : Array(this.xWithVias[0].length).fill(0)
 		this.elapsedEpoch = 0
 		return async ? this[_startAsync]() : this[_startSync]()

@@ -41,12 +41,12 @@ perceptron.on('done', ({epoch, elapsedEpoch, w}) => {
 })
 
 // train synchronously
-const result = perceptron.train().what.is.that(x)
+const result = perceptron.learn().what.is.that(x)
 console.log('result => [' + result + ']') // should be [0,0,0,1]
 
 // train asynchronously
 perceptron
-	.train({
+	.learn({
 		w: [10,20,5], // you can optionaly give initial weights
 		async: true // if async: true, then process will be executed asynchronously, and returns a promise
 	})
