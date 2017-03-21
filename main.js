@@ -1,2 +1,8 @@
 const Perceptron = require('./lib/perceptron/main').default
-module.exports = {Perceptron}
+const isBrowser = new Function("try {return this===window;}catch(e){ return false;}")
+
+if (isBrowser()) {
+	window.machineLearning = {Perceptron}
+} else {
+	module.exports = {Perceptron}
+}

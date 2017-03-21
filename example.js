@@ -1,4 +1,4 @@
-const Perceptron = require('./main').Perceptron
+const Perceptron = require('./bundle').Perceptron
 
 // initialize
 const perceptron = new Perceptron({

@@ -4,5 +4,6 @@
 .gitignore
 example.js
 gulpfile.babel.js
+test.html
 /src
 /test

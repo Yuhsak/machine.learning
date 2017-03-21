@@ -55,6 +55,22 @@ perceptron
 	})
 ```
 
+## For browser
+
+Simply import `browser.js` in your html, then `machineLearning` object will be attached to global.
+
+```html
+<script src='browser.js'></script>
+<script>
+	const perceptron = new machineLearning.Perceptron()
+	perceptron.this.([0,0]).should.be(0)
+	perceptron.this.([1,1]).should.be(1)
+	perceptron.learn()
+	const answer = perceptron.what.is.that([1,1])
+	console.log(answer) // should be 1
+</script>
+```
+
 ## Development
 
 Currently this module uses gulp as task runner for build source codes, and mocha for testing.

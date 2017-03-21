@@ -10,8 +10,13 @@ const util = {
 		return val > 0 ? 1 : 0
 	},
 	isNested(arr) {
-		return arr.some(_arr => {return Array.isArray(_arr)})
+		return Array.isArray(arr[0])
+	},
+	runAsync(callback) {
+		const isBrowser = new Function("try {return this===window;}catch(e){ return false;}")
+		isBrowser() ? setTimeout(() => {callback()},10) : process.nextTick(() => {callback()})
 	}
+	
 }
 
 const [_startSync, _startAsync, _process, _withVias] = [...Array(4).keys()].map(Symbol)
@@ -30,9 +35,10 @@ class Perceptron {
 	}
 	
 	[_startSync]() {
-		Array(this.epoch).fill(0).some(() => {
-			return this[_process]()
-		})
+		let r = false
+		while (!r) {
+			r = this[_process]()
+		}
 		this.emit('done', this.resultProps)
 		return this
 	}
@@ -43,11 +49,9 @@ class Perceptron {
 			(function _loop (_i) {
 				return new Promise((_resolve, _reject) => {
 					const shouldBreak = self[_process]()
-					// process.nextTick(() => {
-					setTimeout(()=>{
+					util.runAsync(() => {
 						_resolve({time: _i+1, shouldBreak})
-					// })
-				}, 10)
+					})
 				})
 				.then(({time, shouldBreak}) => {
 					if (shouldBreak || time >= self.epoch-1) {
