@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp build ; gulp bundle",
-    "test": "mocha",
+    "build": "gulp build && gulp bundle",
+    "test": "npm run build && mocha",
     "prepublish": "npm run build"
   },
   "repository": {

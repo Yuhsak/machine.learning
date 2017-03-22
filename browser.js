@@ -180,7 +180,7 @@
 				var _this2 = this;
 
 				this.elapsedEpoch++;
-				this.xWith.forEach(function (inputVec, index) {
+				this.xWithBias.forEach(function (inputVec, index) {
 					var o = _this2.output(inputVec)[0];
 					var y = _this2.y[index];
 					_this2.w = _this2.w.map(function (weight, _index) {
